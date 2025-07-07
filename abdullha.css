@@ -1,0 +1,1139 @@
+:root {
+  --primary: #00f7ff;
+  --secondary: #ff00f7;
+  --accent: #7700ff;
+  --dark: #0a0a12;
+  --darker: #05050a;
+  --light: rgba(255, 255, 255, 0.9);
+  --glass-light: rgba(255, 255, 255, 0.15);
+  --glass-dark: rgba(0, 0, 0, 0.15);
+  --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor;
+  --glass-blur: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--dark);
+  color: var(--light);
+  font-family: 'Kanit', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 0, 85, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+    linear-gradient(to bottom, var(--darker), var(--dark));
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,0,85,0.03)" d="M0,0 L100,0 L100,100 L0,100 Z" /><path fill="none" stroke="rgba(0,255,255,0.03)" stroke-width="0.5" d="M0,0 L100,100 M100,0 L0,100" /></svg>');
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glitch-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+
+.glitch {
+  color: #fff;
+  font-size: clamp(3.0rem, 5vw, 3.5rem);
+  white-space: nowrap;
+  font-weight: 900;
+  position: relative;
+  user-select: none;
+}
+
+.glitch::after,
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background-color: #060010;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
+.glitch::after {
+  left: 10px;
+  text-shadow: -2px 0 red;
+  animation: animate-glitch 3s infinite linear alternate-reverse;
+}
+
+.glitch::before {
+  left: -10px;
+  text-shadow: 2px 0 cyan;
+  animation: animate-glitch 2s infinite linear alternate-reverse;
+}
+
+@keyframes animate-glitch {
+  0% {
+    clip-path: inset(20% 0 50% 0);
+  }
+
+  5% {
+    clip-path: inset(10% 0 60% 0);
+  }
+
+  10% {
+    clip-path: inset(15% 0 55% 0);
+  }
+
+  15% {
+    clip-path: inset(25% 0 35% 0);
+  }
+
+  20% {
+    clip-path: inset(30% 0 40% 0);
+  }
+
+  25% {
+    clip-path: inset(40% 0 20% 0);
+  }
+
+  30% {
+    clip-path: inset(10% 0 60% 0);
+  }
+
+  35% {
+    clip-path: inset(15% 0 55% 0);
+  }
+
+  40% {
+    clip-path: inset(25% 0 35% 0);
+  }
+
+  45% {
+    clip-path: inset(30% 0 40% 0);
+  }
+
+  50% {
+    clip-path: inset(20% 0 50% 0);
+  }
+
+  55% {
+    clip-path: inset(10% 0 60% 0);
+  }
+
+  60% {
+    clip-path: inset(15% 0 55% 0);
+  }
+
+  65% {
+    clip-path: inset(25% 0 35% 0);
+  }
+
+  70% {
+    clip-path: inset(30% 0 40% 0);
+  }
+
+  75% {
+    clip-path: inset(40% 0 20% 0);
+  }
+
+  80% {
+    clip-path: inset(20% 0 50% 0);
+  }
+
+  85% {
+    clip-path: inset(10% 0 60% 0);
+  }
+
+  90% {
+    clip-path: inset(15% 0 55% 0);
+  }
+
+  95% {
+    clip-path: inset(25% 0 35% 0);
+  }
+
+  100% {
+    clip-path: inset(30% 0 40% 0);
+  }
+}
+
+.eye {
+  font-size: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.eye.left {
+  animation-delay: 0s;
+}
+
+.eye.right {
+  animation-delay: 1.5s;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+#spark-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#spark-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Container with Glass Morphism */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Welcome Screen with Liquid Effect */
+.welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 10, 0.98);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeOut 1s ease-in-out 3s forwards;
+}
+
+.welcome-logo {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  color: var(--primary);
+  text-shadow: var(--neon-glow);
+  margin-bottom: 2rem;
+  animation: pulse 2s infinite alternate, float 6s ease-in-out infinite;
+  position: relative;
+}
+
+.welcome-logo::after {
+  content: '🔥';
+  position: absolute;
+  right: -1.5em;
+  top: -0.5em;
+  font-size: 0.6em;
+  animation: dropletFall 3s infinite;
+}
+
+.welcome-text {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  color: var(--secondary);
+  text-align: center;
+  max-width: 80%;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
+}
+
+.loading-bar {
+  width: 80%;
+  max-width: 400px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out 1s forwards;
+}
+
+.loading-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  animation: loadProgress 2s ease-in-out forwards;
+  border-radius: 2px;
+}
+
+.loading-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: loadingShine 2s infinite;
+}
+
+/* Main Content with Glass Morphism */
+.main-content {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 3.5s forwards;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+  color: var(--primary);
+  margin-bottom: 1rem;
+  text-shadow: var(--neon-glow);
+  position: relative;
+  display: inline-block;
+}
+
+.title::before,
+.title::after {
+  content: '🔥';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.6em;
+  animation: dropletFloat 3s ease-in-out infinite;
+}
+
+.title::before {
+  left: -1.2em;
+  animation-delay: 0.5s;
+}
+
+.title::after {
+  right: -1.2em;
+  animation-delay: 1s;
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: var(--secondary);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 5px var(--secondary);
+}
+
+/* Glass Social Links */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: rotate(30deg);
+  transition: var(--transition);
+  opacity: 0;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(0, 247, 255, 0.3);
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  color: white;
+}
+
+.social-link:hover::before {
+  opacity: 1;
+  animation: glassShine 1.5s;
+}
+
+.social-link i {
+  font-size: 1.2rem;
+}
+
+/* Glass Stats Box */
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  background: rgba(20, 20, 30, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  min-width: 150px;
+  text-align: center;
+  border: 1px solid rgba(0, 247, 255, 0.2);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 0 8px rgba(0, 247, 255, 0.1);
+  transition: var(--transition);
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 247, 255, 0.2);
+}
+
+.stat-title {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-shadow: 0 0 8px var(--primary);
+}
+
+/* Glass Disclaimer Button */
+.disclaimer-btn {
+  background: rgba(0, 247, 255, 0.15);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  font-family: 'Kanit', sans-serif;
+  transition: var(--transition);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+}
+
+.disclaimer-btn:hover {
+  background: rgba(0, 247, 255, 0.3);
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.disclaimer-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.disclaimer-btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* Glass Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(20px);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  border: 1px solid var(--primary);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 247, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: rotate(30deg);
+  animation: modalShine 6s infinite;
+}
+
+.modal-title {
+  color: var(--primary);
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-shadow: var(--neon-glow);
+}
+
+.modal-text {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Kanit', sans-serif;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-btn-primary {
+  background: var(--primary);
+  color: var(--darker);
+  border: none;
+  font-weight: 600;
+}
+
+.modal-btn-primary:hover {
+  background: #00d5db;
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.modal-btn-secondary {
+  background: transparent;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+}
+
+.modal-btn-secondary:hover {
+  background: rgba(255, 0, 247, 0.1);
+  box-shadow: 0 0 15px var(--secondary);
+}
+
+/* Liquid Glass Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 247, 255, 0.15);
+  color: var(--secondary);
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--secondary);
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 0, 247, 0.3);
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out forwards;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toast::before {
+  content: '🔥';
+}
+
+/* Liquid Glass Search Bar */
+.search-container {
+  margin-bottom: 2rem;
+  position: relative;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  border: none;
+  background: rgba(20, 20, 30, 0.5);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-family: 'Kanit', sans-serif;
+  font-size: 1rem;
+  border: 1px solid rgba(0, 247, 255, 0.3);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.2),
+    inset 0 0 8px rgba(0, 247, 255, 0.1);
+  transition: var(--transition);
+  padding-left: 3rem;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(0, 247, 255, 0.3);
+  border-color: var(--primary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary);
+  font-size: 1.2rem;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(30, 30, 40, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 0 0 16px 16px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+  border: 1px solid rgba(0, 247, 255, 0.3);
+  border-top: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.search-suggestions.show {
+  display: block;
+}
+
+.suggestion-item {
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: rgba(0, 247, 255, 0.1);
+  color: var(--primary);
+}
+
+.no-results {
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+/* Liquid Glass Projects Grid */
+.projects-container {
+  background: rgba(10, 10, 20, 0.5);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+  margin-bottom: 3rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-container:hover {
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 247, 255, 0.2);
+}
+
+.projects-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: var(--secondary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.projects-title i {
+  color: var(--primary);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Liquid Glass Project Card */
+.project-card {
+  background: rgba(20, 20, 30, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+      rgba(0, 247, 255, 0.05) 0%,
+      rgba(255, 0, 247, 0.05) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(0, 247, 255, 0.3);
+  border-color: rgba(0, 247, 255, 0.4);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+/* Project Icon with Liquid Effect */
+.project-icon {
+  height: 150px;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: var(--primary);
+  position: relative;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.project-icon.with-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+}
+
+.project-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.1), rgba(255, 0, 247, 0.1));
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.project-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: rotate(30deg);
+  animation: glassShine 6s infinite;
+  opacity: 0.5;
+}
+
+.project-icon i {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 15px var(--primary);
+}
+
+.project-info {
+  padding: 1.2rem;
+}
+
+.project-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Liquid Glass Project Link */
+.project-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--secondary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 0, 247, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-link:hover {
+  background: var(--primary);
+  color: var(--darker);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.project-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.project-link:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* Liquid Glass Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  background: rgba(10, 10, 20, 0.3);
+  border-radius: 0 0 16px 16px;
+}
+
+/* Water Droplet Animations */
+@keyframes dropletFall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes dropletFloat {
+
+  0%,
+  100% {
+    transform: translateY(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateY(-50%) translateY(-15px);
+  }
+}
+
+/* Liquid Glass Animations */
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+@keyframes rippleFlow {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes glassShine {
+  0% {
+    left: -100%;
+    top: -100%;
+  }
+
+  20% {
+    left: 100%;
+    top: 100%;
+  }
+
+  100% {
+    left: 100%;
+    top: 100%;
+  }
+}
+
+@keyframes modalShine {
+  0% {
+    left: -100%;
+    top: -100%;
+  }
+
+  20% {
+    left: 100%;
+    top: 100%;
+  }
+
+  100% {
+    left: 100%;
+    top: 100%;
+  }
+}
+
+@keyframes loadingShine {
+  0% {
+    left: -100%;
+  }
+
+  20% {
+    left: 100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Base Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes loadProgress {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-link {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .glass-panel {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-icon {
+    height: 120px;
+  }
+
+  .search-bar {
+    padding: 0.8rem 1.2rem;
+    padding-left: 2.5rem;
+  }
+
+  .search-icon {
+    left: 1rem;
+    font-size: 1rem;
+  }
+
+  .stat-box {
+    min-width: 120px;
+    padding: 0.8rem 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.2rem;
+  }
+}
